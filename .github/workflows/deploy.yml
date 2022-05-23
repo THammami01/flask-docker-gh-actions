@@ -1,16 +1,26 @@
-name: remote ssh command
-on: [push]
-jobs:
+name: Deploy Flask Application with Docker and GH Actions
 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
   build:
-    name: Build
+    name: Deployment
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: whoami
+      - name: Executing Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            [ -d ./flask-docker-gh-actions ] || git clone git@github.com:THammami01/flask-docker-gh-actions.git
+            cd flask-docker-gh-actions
+            git pull
+            docker image build -t flask-docker-gh-actions .
+            docker run -p 5000:5000 -d flask-docker-gh-actions
+            
