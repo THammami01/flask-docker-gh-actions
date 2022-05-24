@@ -20,7 +20,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd ~
-            [ -d ./flask-docker-gh-actions ] || git clone git@github.com:THammami01/flask-docker-gh-actions.git
+            [ -d ./flask-docker-gh-actions ] || git clone https://github.com/THammami01/flask-docker-gh-actions.git
             cd flask-docker-gh-actions
             git pull
             docker-compose down
