@@ -23,5 +23,5 @@ jobs:
             [ -d ./flask-docker-gh-actions ] || git clone https://github.com/THammami01/flask-docker-gh-actions.git
             cd flask-docker-gh-actions
             git pull
-            docker-compose down
+            docker-compose down --rmi all
             docker-compose up -d
