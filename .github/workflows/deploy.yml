@@ -24,4 +24,3 @@ jobs:
             git pull
             docker-compose down
             docker-compose up -d
-            docker rm -f $(docker ps -a -q)  # kill all processes (both running and not running)
