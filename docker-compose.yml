@@ -6,5 +6,5 @@ services:
     build: ./
     container_name: server
     ports:
-      - "5000:5000"
+      - "5002:5000"
     restart: unless-stopped
